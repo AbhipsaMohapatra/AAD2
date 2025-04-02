@@ -1,0 +1,64 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+class Data implements Comparable<Data>{
+    int profit ;
+    double weight;
+    Data(int p,double weight){
+        this.profit = p;
+        this.weight = weight;
+    }
+
+    public int compareTo(Data d){
+        Data nd = (Data) d;
+        double d1 = (this.profit)/(this.weight);
+        double d2 = (nd.profit)/(nd.weight);
+        return Double.compare(d1,d2);
+    }
+    public String ToString(){
+        return this.profit+" "+this.weight;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+        // to see how IntelliJ IDEA suggests fixing it.
+        ArrayList<Data> al = new ArrayList<>();
+        al.add(new Data(10,2));
+        al.add(new Data(5,3));
+        al.add(new Data(15,5));
+        al.add(new Data(7,7));
+        al.add(new Data(6,1));
+        al.add(new Data(18,4));
+        al.add(new Data(3,1));
+        Collections.sort(al,Collections.reverseOrder());
+//        for(Data e:al){
+//            System.out.println(e.weight+" and  "+e.profit + " "+(e.profit/e.weight ));
+//        }
+        double m = 15;
+        double p=0;
+        int n = 7;
+        int i=0;
+        for( ;i<al.size();i++){
+            if(m>0 && al.get(i).weight<=m){
+                m = m-al.get(i).weight;
+                p = p+al.get(i).profit;
+//                System.out.println(p);
+            }
+            else{
+                break;
+            }
+
+
+        }
+        if(m>0){
+            p=p+al.get(i).profit*(m/(al.get(i).weight));
+        }
+        System.out.println("Final");
+        System.out.println(p);
+
+
+    }
+}
