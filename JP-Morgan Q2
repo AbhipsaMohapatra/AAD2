@@ -1,0 +1,63 @@
+package HackerRank;
+
+import java.util.Arrays;
+import java.util.*;
+//This to calculate the elements greater than or equal to the current elent and use it in a formula
+
+public class Q3 {
+    public static HashMap<Integer,Integer> getEqualAGreater(int[] arr){
+        Arrays.sort(arr);
+
+        Set<Integer> set = new LinkedHashSet<>();
+        for(int e:arr){
+            set.add(e);
+        }
+        int n =set.size();
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        Iterator<Integer> i = set.iterator();
+        int c=0;
+        while(i.hasNext()){
+            int ele = i.next();
+            hm.put(ele,(n-c));
+            c++;
+        }
+
+        return hm;
+
+    }
+    public static HashMap<Integer,Integer> getEqual(int[] arr){
+        HashMap<Integer,Integer> m = new HashMap();
+        for(int e:arr){
+            m.put(e,m.getOrDefault(e,0)+1);
+        }
+        return m;
+
+    }
+    public static void main(String[] args) {
+        int[] arr = {3,2,4,3,5,5};
+        HashMap<Integer,Integer> greater = getEqualAGreater(arr);
+        HashMap<Integer,Integer> equal = getEqual(arr);
+        System.out.println(greater);
+        System.out.println(getEqual(arr));
+        int n = arr.length;
+
+
+
+        int inc =500;
+        int dec =100;
+
+        for(int e:arr){
+
+
+//
+            int ge = getEqualAGreater(arr).get(e);
+            int eq = equal.get(e);
+
+            int val = (inc * (n + 1 - ge)) - (dec * eq);
+            System.out.println(val);
+            System.out.println("____------------_______");
+
+        }
+
+    }
+}
